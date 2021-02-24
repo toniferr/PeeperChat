@@ -14,7 +14,18 @@ function render(data){
             </div>
         `); //comilla inversas permite interpolar en varias lineas
     }).join(' ');
+    var div_msgs = document.getElementById('messages')
+    div_msgs.innerHTML = html;
+    div_msgs.scrollTop = div_msgs.scrollHeight;
+}
 
-    document.getElementById('messages').innerHTML = html;
+function addMessage(e){
+    var message = {
+        nickname: document.getElementById('nickname').value,
+        text: document.getElementById('text').value
+    }
 
+    document.getElementById('nickname').style.display = 'none'; //asi no se peude cambiar nickname
+    socket.emit('add-message', message);
+    return false;
 }
